@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello - Paste from clipboard</title>
+
+	<style type="text/css">
+
+		textarea {
+
+			width: 800px;
+			height: 500px;
+
+		}
+
+	</style>
+</head>
+<body>
+
+	<textarea>Try to paste something in here</textarea>
+	
+	<script type="text/javascript">
+
+		document.querySelector('textarea').addEventListener('paste',function(e) {
+
+			//Which types are available
+			console.log(e.clipboardData.types);
+
+			var type =  e.clipboardData.types.indexOf('text/html') < 0 ? 'text/plain' : 'text/html';
+
+			//var type = 'application/x-vnd.google-docs-document-slice-clip+wrapped';
+
+			e.preventDefault();	    		
+	    	document.querySelector('textarea').innerHTML = e.clipboardData.getData( type );
+		});
+
+	</script>
+</body>
+</html>
